@@ -6,18 +6,18 @@ const messageEl = document.querySelector('#message');
 
 /*---------------------------- Variables (state) ----------------------------*/
 let board = '';
-let turn = '';
-let winner = '';
-let tie = '';
+let turn = 'X';
+let winner = false;
+let tie = false;
 
 
 
 /*------------------------ Cached Element References ------------------------*/
 board = ['', '', '', '', '', '', '', '', '',];
 //console.log(board[0]);
-turn = 'X';
-winner = false;
-tie = false;
+turn = '';
+winner = '';
+tie = '';
 
 //console.log(board);
 
@@ -27,8 +27,18 @@ const updateBoard = () => {
         squareEl[index].textContent = value
     });
 }
-updateBoard(squareEl)
-
+//updateBoard(squareEl)
+const updateMessage = () => {
+    if (winner === false && tie === false) {
+        messageEl.textContent = `${turn}'s turn`;
+    } else if (winner === false && tie === true) {
+        messageEl.textContent = "It's a tie!";
+    } else {
+        messageEl.textContent = 
+        `Congradulations ${turn}, you've won the round!`;
+    }
+}
+//updateMessage()
 const render = () => {
 
 };
