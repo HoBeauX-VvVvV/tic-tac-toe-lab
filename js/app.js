@@ -1,7 +1,4 @@
 /*-------------------------------- Constants --------------------------------*/
-const squareEl = document.querySelectorAll('.sqr');
-const messageEl = document.querySelector('#message');
-//console.log(squareEl)
 const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -18,17 +15,16 @@ let board = '';
 let turn = 'X';
 let winner = false;
 let tie = false;
-
-
-
-/*------------------------ Cached Element References ------------------------*/
+let squareIndex = '';
 board = ['', '', 'O', '', '', 'X', '', '', '',];
-//console.log(board[0]);
 turn = 'X';
 winner = false;
 tie = false;
 
-//console.log(board);
+/*------------------------ Cached Element References ------------------------*/
+const squareEl = document.querySelectorAll('.sqr');
+const messageEl = document.querySelector('#message');
+//const boardEl = document.querySelector('.board');
 
 /*-------------------------------- Functions --------------------------------*/
 const updateBoard = () => {
@@ -59,19 +55,36 @@ const init = () => {
 };
 window.onload = init;
 
+const handleClick = (event) => {
+   //const squareIndex = event.target.id
+   if (board[squareIndex] === 'X' || board[squareIndex] === 'O') {
+    return
+    //console.log(`1${squareIndex}`);;
+   } else if  
+    (winner === true) {
+        return
+    //console.log(`2${squareIndex}`);   
+    } placePeice(squareIndex);
+    //console.log(`3${squareIndex}`)
+   };
 
-//4) The state of the game should be rendered to the user.
 
+const placePeice = (index) => {
+    board[squareIndex] = turn;
+    event.target.textContent = turn;
+}
 //7) Create Reset functionality.
 
 /*----------------------------- Event Listeners -----------------------------*/
-
-//6) Handle a player clicking a square with a `handleClick` function.
+squareEl.forEach((square) => {
+    square.addEventListener('click', (event) => {
+    squareIndex = event.target.id    
+    handleClick();
+    //console.log(squareIndex);
+  });
+});
 
 //7) Create Reset functionality.
-
-
-
 
 //---------------------Finished---------------------------------------------
 
@@ -82,4 +95,8 @@ window.onload = init;
 //3) Upon loading, the game state should be initialized, and a function should 
 //   be called to render this game state.
 
+//4) The state of the game should be rendered to the user.
+
 //5) Define the required constants.
+
+//6) Handle a player clicking a square with a `handleClick` function.
