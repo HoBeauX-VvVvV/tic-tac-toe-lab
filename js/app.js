@@ -88,8 +88,12 @@ const checkForWinner = () => {
 const checkForTie = () => {
     if (winner === true) {
        return
-    } else 
-    board.some(square => square === '');
+    } if 
+    (board.some(square => square === '')) {
+    tie = false;
+} else {
+    tie = true;
+   }
 };
 
 const switchPlayerTurn = () => {
