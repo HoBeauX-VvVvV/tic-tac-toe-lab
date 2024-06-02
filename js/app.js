@@ -16,7 +16,7 @@ let turn = 'X';
 let winner = false;
 let tie = false;
 let squareIndex = '';
-board = ['', '', 'O', '', '', 'X', '', '', '',];
+board = ['', '', '', '', '', '', '', '', '',];
 turn = 'X';
 winner = false;
 tie = false;
@@ -25,7 +25,7 @@ tie = false;
 
 const squareEl = document.querySelectorAll('.sqr');
 const messageEl = document.querySelector('#message');
-
+const resetButtonEl = document.querySelector('#reset');
 
 /*-------------------------------- Functions --------------------------------*/
 const updateBoard = () => {
@@ -50,11 +50,11 @@ const render = () => {
     updateMessage();
 };
 
-const init = () => {
-    render();
-};
+//const init = () => {
+//   render();
+//};
 
-window.onload = init;
+window.onload = render();
 
 const handleClick = (event) => {
    if (board[squareIndex] === 'X' || board[squareIndex] === 'O') {
@@ -64,8 +64,11 @@ const handleClick = (event) => {
      return  
     } placePeice(squareIndex);
       checkForWinner();
-      //updateMessage();
-   };
+      checkForTie();
+      updateMessage();
+      switchPlayerTurn();
+      
+};
 
 
 const placePeice = (index) => {
@@ -78,12 +81,32 @@ const checkForWinner = () => {
         const [a,b,c] = combo;
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
             winner = true;
-            //console.log('Winner!');
         }
     }
-}
-//7) Create Reset functionality.
+};
 
+const checkForTie = () => {
+    if (winner === true) {
+       return
+    } else 
+    board.some(square => square === '');
+};
+
+const switchPlayerTurn = () => {
+    if (turn === 'X') {
+        turn ='O';
+    } else if (turn === 'O') {
+        turn = 'X'
+    };
+}
+
+const resetGame = () => {
+    board = ['', '', '', '', '', '', '', '', ''];
+    turn = 'X';
+    winner = false;
+    updateBoard();
+    updateMessage();
+}
 /*----------------------------- Event Listeners -----------------------------*/
 squareEl.forEach((square) => {
     square.addEventListener('click', (event) => {
@@ -92,7 +115,9 @@ squareEl.forEach((square) => {
   });
 });
 
-//7) Create Reset functionality.
+resetButtonEl.addEventListener('click', (event) => {
+    resetGame();
+});
 
 //---------------------Finished---------------------------------------------
 
@@ -108,3 +133,5 @@ squareEl.forEach((square) => {
 //5) Define the required constants.
 
 //6) Handle a player clicking a square with a `handleClick` function.
+
+//7) Create Reset functionality.

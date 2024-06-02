@@ -25,3 +25,15 @@ body {
     background-color: darkkhaki;
   }
   
+  #reset {
+    width: 175px;
+    height: 55px;
+    margin-top: 75px;
+    font-family: fantasy;
+    font-size: 40px;
+    background-color: slateblue;
+    color: rgb(186, 247, 255);
+  }
+
+
+  
