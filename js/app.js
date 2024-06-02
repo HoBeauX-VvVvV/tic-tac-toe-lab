@@ -22,9 +22,10 @@ winner = false;
 tie = false;
 
 /*------------------------ Cached Element References ------------------------*/
+
 const squareEl = document.querySelectorAll('.sqr');
 const messageEl = document.querySelector('#message');
-//const boardEl = document.querySelector('.board');
+
 
 /*-------------------------------- Functions --------------------------------*/
 const updateBoard = () => {
@@ -32,7 +33,7 @@ const updateBoard = () => {
         squareEl[index].textContent = value
     });
 }
-//updateBoard(squareEl)
+
 const updateMessage = () => {
     if (winner === false && tie === false) {
         messageEl.textContent = `${turn}'s turn`;
@@ -43,7 +44,7 @@ const updateMessage = () => {
         `Congradulations ${turn}, you've won the round!`;
     }
 }
-//updateMessage()
+
 const render = () => {
     updateBoard();
     updateMessage();
@@ -51,27 +52,35 @@ const render = () => {
 
 const init = () => {
     render();
-  //console.log('app has initalized');
 };
+
 window.onload = init;
 
 const handleClick = (event) => {
-   //const squareIndex = event.target.id
    if (board[squareIndex] === 'X' || board[squareIndex] === 'O') {
     return
-    //console.log(`1${squareIndex}`);;
    } else if  
-    (winner === true) {
-        return
-    //console.log(`2${squareIndex}`);   
+    (winner === true) { 
+     return  
     } placePeice(squareIndex);
-    //console.log(`3${squareIndex}`)
+      checkForWinner();
+      //updateMessage();
    };
 
 
 const placePeice = (index) => {
     board[squareIndex] = turn;
     event.target.textContent = turn;
+};
+
+const checkForWinner = () => {
+    for (let combo of winningCombos) {
+        const [a,b,c] = combo;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            winner = true;
+            //console.log('Winner!');
+        }
+    }
 }
 //7) Create Reset functionality.
 
@@ -80,7 +89,6 @@ squareEl.forEach((square) => {
     square.addEventListener('click', (event) => {
     squareIndex = event.target.id    
     handleClick();
-    //console.log(squareIndex);
   });
 });
 
